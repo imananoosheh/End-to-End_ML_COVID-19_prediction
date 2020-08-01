@@ -43,16 +43,16 @@ def predict(countryName, statType):
 
     Returns
     -------
-    nextWeekPredictionDict : DICTIONARY
+    outfile : JSON file
             #JSON structure
-            # nextWeekPredictionDict['data'] 
-            # ({
+            # nextWeekPredictionDict = 'data' :  
+            # [{
             #     'countryName' : str(countryName), # :string of input country name
             #     'statType' : str(statType), # :float or ndarray of floats of input stat type ('confirmed', 'deaths', or 'recovered')
             #     'nextWeek' : nextWeek, # :list of next 7 days of predicted statType value 
             #     'errorRange' : errorRange, # :float or ndarray of floats as an range of error = value(+/-)errorRange
             #     'PolyRegDeg' : degree # :int of maximum degree of polynomial regression fit to the data
-            #     })
+            #     }]
 
     """
     # Manual Input
@@ -147,9 +147,11 @@ def predict(countryName, statType):
         'errorRange' : errorRange,
         'PolyRegDeg' : degree
         })
-     
     
-    return nextWeekPredictionDict
+    with open('nextWeekPredictionDict.txt', 'w') as outfile:
+        json.dump(nextWeekPredictionDict, outfile)
+    
+    return outfile
 
 ## Test Calls
 predict('Canada', 'deaths')
