@@ -41,23 +41,12 @@ def predict(countryName, statType):
     statType : STRING
         'confirmed', 'deaths', or 'recovered'.
 
-    Returns
-    -------
-    outfile : JSON file
-            #JSON structure
-            # nextWeekPredictionDict = 'data' :  
-            # [{
-            #     'countryName' : str(countryName), # :string of input country name
-            #     'statType' : str(statType), # :float or ndarray of floats of input stat type ('confirmed', 'deaths', or 'recovered')
-            #     'nextWeek' : nextWeek, # :list of next 7 days of predicted statType value 
-            #     'errorRange' : errorRange, # :float or ndarray of floats as an range of error = value(+/-)errorRange
-            #     'PolyRegDeg' : degree # :int of maximum degree of polynomial regression fit to the data
-            #     }]
+    A JSON file with the name of \'prediction.json\' is created in current directory.
 
     """
     # Manual Input
-    #countryName = 'Canada'
-    #statType = 'confirmed'
+    # countryName = 'Canada'
+    # statType = 'deaths'
     
     ## Data Preprocessing
     # Loading the dataset from Github API ( https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_time_series )
@@ -119,12 +108,12 @@ def predict(countryName, statType):
     nextWeek = lin_reg_2.predict(poly_reg.fit_transform(nextWeekIndex))
     errorRange = mean_absolute_error(y, Y_predicted)
     
-    # Visualising the Polynomial Regression results (for higher resolution and smoother curve)
-    plt.scatter(X, y, color = 'red')
-    plt.plot(X_grid, Y_predicted, color = 'blue')
-    plt.title('COVID-19 stat prediction (Using Polynomial Regression, with degree of ' + str(degree) + ')\n' + CalculateAccuracy(y, Y_predicted))
-    plt.xlabel('Dates')
-    plt.ylabel(str(statType))
+    # Visualising the Polynomial Regression results
+    # plt.scatter(X, y, color = 'red')
+    # plt.plot(X_grid, Y_predicted, color = 'blue')
+    # plt.title('COVID-19 stat prediction (Using Polynomial Regression, with degree of ' + str(degree) + ')\n' + CalculateAccuracy(y, Y_predicted))
+    # plt.xlabel('Dates')
+    # plt.ylabel(str(statType))
     # plt.show()
     
     ## Crafting a JSON file as a return output
@@ -133,28 +122,26 @@ def predict(countryName, statType):
     # ({
     #     'countryName' : str(countryName), # :string of input country name
     #     'statType' : str(statType), # :float or ndarray of floats of input stat type ('confirmed', 'deaths', or 'recovered')
-    #     'nextWeek' : nextWeek, # :list of next 7 days of predicted statType value 
+    #     'nextWeek' : nextWeek.tolist(), # :list of next 7 days of predicted statType value 
     #     'errorRange' : errorRange, # :float or ndarray of floats as an range of error = value(+/-)errorRange
     #     'PolyRegDeg' : degree # :int of maximum degree of polynomial regression fit to the data
     #     })
-    
-    nextWeekPredictionDict = {}
-    nextWeekPredictionDict['data'] = []
-    nextWeekPredictionDict['data'].append({
+    nextWeekPredictionDict= {
         'countryName' : str(countryName),
         'statType' : str(statType),
-        'nextWeek' : nextWeek,
+        'nextWeek' : nextWeek.tolist(),
         'errorRange' : errorRange,
         'PolyRegDeg' : degree
-        })
+        }
     
-    with open('nextWeekPredictionDict.txt', 'w') as outfile:
+    with open('prediction.json', 'w', encoding='utf-8') as outfile:
+        # outfile.write(json.dump(nextWeekPredictionDict, outfile))
         json.dump(nextWeekPredictionDict, outfile)
-    
-    return outfile
+        
 
 ## Test Calls
 predict('Canada', 'deaths')
-predict('Canada', 'confirmed')
-predict('Austria', 'confirms')
-predict('Italy', 'deaths')
+# predict('Canada', 'confirmed')
+# predict('Austria', 'confirms')
+# predict('Italy', 'deaths')
+
