@@ -9,8 +9,8 @@ const header = (props) => {
 
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mx-auto">
-                <li class="nav-item">
-        <a class="nav-link bold text-light" href="#">End to End ML COVID-19 Prediction</a>
+                <li className="nav-item">
+        <a className="nav-link bold text-light" href="#">End to End ML COVID-19 Prediction</a>
             </li>
                 </ul>
 

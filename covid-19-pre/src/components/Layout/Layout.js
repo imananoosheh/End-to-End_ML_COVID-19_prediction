@@ -10,13 +10,12 @@ class Layout extends Component {
         //const gotData = await getData();
         //this.setState({ data: gotData });
     };
-
     render = () => {
         return (
             <>
                 <Header />
                 <main className={classes.Content}>
-                    {this.props.children}
+                {React.cloneElement(this.props.children, { loggedIn: "loggedIn" })}
                 </main>
             </>
         );
