@@ -113,12 +113,13 @@ def predict(countryName, statType, degree=7):
     errorRange = mean_absolute_error(y, Y_predicted)
     
     #Visualising the Polynomial Regression results
-    # plt.scatter(X, y, color = 'red') # Actual Value
-    # plt.plot(X, Y_predicted, color = 'blue') # Polynomial Regression Value
-    # plt.scatter(nextWeekIndex, nextWeek, color = 'black') # Next Week scattered epredicted
+    # plt.scatter(X, y, color = 'red', label = 'Actual values') # Actual Value
+    # plt.plot(X, Y_predicted, color = 'blue', linewidth=1.75, alpha = 0.5, label = 'Polynomial regression (degree=' + str(degree) + ')') # Polynomial Regression Value
+    # plt.scatter(nextWeekIndex, nextWeek, color = 'black', label = 'Next week prediction') # Next Week scattered epredicted
     # plt.title('COVID-19 stat prediction (Using Polynomial Regression, with degree of ' + str(degree) + ')\n' + CalculateAccuracy(y, Y_predicted))
     # plt.xlabel('Dates')
     # plt.ylabel(str(statType))
+    # plt.legend(fontsize = 'large')
     # plt.show()
     
     ## Crafting a JSON file as a return output
@@ -156,7 +157,7 @@ def predict(countryName, statType, degree=7):
         
 
 ## Test Calls
-# predict('Canada', 'deaths')
+predict('Canada', 'deaths')
 # predict('Canada', 'confirmed', 5)
 # predict('Austria', 'confirms')
 # predict('Italy', 'deaths')
