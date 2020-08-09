@@ -12,7 +12,7 @@ As demonstrated below, the application uses Polynomial Regression degree 7 to pr
 ![Console ScreenShot](https://raw.githubusercontent.com/imananoosheh/End-to-End_ML_COVID-19_prediction/master/media/image_2020-08-05_23-10-59.png)
 
 A sample of the results of the prediction can also be seen in the chart below.
-![Console ScreenShot](https://raw.githubusercontent.com/imananoosheh/End-to-End_ML_COVID-19_prediction/master/media/Figure_1.png)
+![Console ScreenShot](https://raw.githubusercontent.com/imananoosheh/End-to-End_ML_COVID-19_prediction/master/media/Figure_2.png)
 
 
 The UI which is created with ReactJS creates an understandable chart for the user. The user can choose the desired country and view the predictions based on the existing data. (The ScreenShot is created using dummy data.)
