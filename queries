@@ -1,0 +1,1353 @@
+DROP DATAVERSE COVID IF EXISTS;
+CREATE DATAVERSE COVID;
+USE COVID;
+CREATE TYPE ProvinceData AS closed
+                        {
+                            date: date,
+                            province: string,
+                            country: string,
+                            confirmed: int,
+                            death: int,
+                            recovered: int
+                        };
+CREATE TYPE LocationData AS closed
+                        {
+                            location_name: string,
+                            longitude: float,
+                            latitude: float,
+                        };
+create type CountryData as open
+                    {
+                            country_name: string,
+                            pd: [ProvinceData]
+                    };
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":33.939110,"latitude":67.709953}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":41.153300,"latitude":20.168300}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":28.033900,"latitude":1.659600}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":42.506300,"latitude":1.521800}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-11.202700,"latitude":17.873900}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":17.060800,"latitude":-61.796400}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-38.416100,"latitude":-63.616700}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":40.069100,"latitude":45.038200}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Australian Capital Territory","longitude":-35.473500,"latitude":149.012400}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"New South Wales","longitude":-33.868800,"latitude":151.209300}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Northern Territory","longitude":-12.463400,"latitude":130.845600}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Queensland","longitude":-27.469800,"latitude":153.025100}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"South Australia","longitude":-34.928500,"latitude":138.600700}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Tasmania","longitude":-42.882100,"latitude":147.327200}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Victoria","longitude":-37.813600,"latitude":144.963100}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Western Australia","longitude":-31.950500,"latitude":115.860500}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":47.516200,"latitude":14.550100}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":40.143100,"latitude":47.576900}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":25.025885,"latitude":-78.035889}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":26.027500,"latitude":50.550000}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":23.685000,"latitude":90.356300}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":13.193900,"latitude":-59.543200}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":53.709800,"latitude":27.953400}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":50.833300,"latitude":4.469936}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":9.307700,"latitude":2.315800}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":27.514200,"latitude":90.433600}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-16.290200,"latitude":-63.588700}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":43.915900,"latitude":17.679100}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-14.235000,"latitude":-51.925300}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":4.535300,"latitude":114.727700}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":42.733900,"latitude":25.485800}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":12.238300,"latitude":-1.561600}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":16.538800,"latitude":-23.041800}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":11.550000,"latitude":104.916700}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":3.848000,"latitude":11.502100}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Alberta","longitude":53.933300,"latitude":-116.576500}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"British Columbia","longitude":53.726700,"latitude":-127.647600}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Grand Princess","longitude":0.000000,"latitude":0.000000}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Manitoba","longitude":53.760900,"latitude":-98.813900}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"New Brunswick","longitude":46.565300,"latitude":-66.461900}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Newfoundland and Labrador","longitude":53.135500,"latitude":-57.660400}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Nova Scotia","longitude":44.682000,"latitude":-63.744300}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Ontario","longitude":51.253800,"latitude":-85.323200}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Prince Edward Island","longitude":46.510700,"latitude":-63.416800}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Quebec","longitude":52.939900,"latitude":-73.549100}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Saskatchewan","longitude":52.939900,"latitude":-106.450900}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":6.611100,"latitude":20.939400}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":15.454200,"latitude":18.732200}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-35.675100,"latitude":-71.543000}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Anhui","longitude":31.825700,"latitude":117.226400}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Beijing","longitude":40.182400,"latitude":116.414200}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Chongqing","longitude":30.057200,"latitude":107.874000}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Fujian","longitude":26.078900,"latitude":117.987400}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Gansu","longitude":35.751800,"latitude":104.286100}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Guangdong","longitude":23.341700,"latitude":113.424400}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Guangxi","longitude":23.829800,"latitude":108.788100}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Guizhou","longitude":26.815400,"latitude":106.874800}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Hainan","longitude":19.195900,"latitude":109.745300}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Hebei","longitude":39.549000,"latitude":116.130600}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Heilongjiang","longitude":47.862000,"latitude":127.761500}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Henan","longitude":37.895700,"latitude":114.904200}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Hong Kong","longitude":22.300000,"latitude":114.200000}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Hubei","longitude":30.975600,"latitude":112.270700}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Hunan","longitude":27.610400,"latitude":111.708800}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Inner Mongolia","longitude":44.093500,"latitude":113.944800}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Jiangsu","longitude":32.971100,"latitude":119.455000}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Jiangxi","longitude":27.614000,"latitude":115.722100}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Jilin","longitude":43.666100,"latitude":126.192300}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Liaoning","longitude":41.295600,"latitude":122.608500}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Macau","longitude":22.166700,"latitude":113.550000}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Ningxia","longitude":37.269200,"latitude":106.165500}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Qinghai","longitude":35.745200,"latitude":95.995600}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Shaanxi","longitude":35.191700,"latitude":108.870100}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Shandong","longitude":36.342700,"latitude":118.149800}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Shanghai","longitude":31.202000,"latitude":121.449100}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Shanxi","longitude":37.577700,"latitude":112.292200}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Sichuan","longitude":30.617100,"latitude":102.710300}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Tianjin","longitude":39.305400,"latitude":117.323000}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Tibet","longitude":31.692700,"latitude":88.092400}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Xinjiang","longitude":41.112900,"latitude":85.240100}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Yunnan","longitude":24.974000,"latitude":101.487000}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Zhejiang","longitude":29.183200,"latitude":120.093400}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":4.570900,"latitude":-74.297300}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-0.228000,"latitude":15.827700}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-4.038300,"latitude":21.758700}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":9.748900,"latitude":-83.753400}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":7.540000,"latitude":-5.547100}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":45.100000,"latitude":15.200000}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":0.000000,"latitude":0.000000}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":21.521757,"latitude":-77.781167}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":35.126400,"latitude":33.429900}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":49.817500,"latitude":15.473000}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Faroe Islands","longitude":61.892600,"latitude":-6.911800}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Greenland","longitude":71.706900,"latitude":-42.604300}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":56.263900,"latitude":9.501800}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":11.825100,"latitude":42.590300}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":18.735700,"latitude":-70.162700}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-1.831200,"latitude":-78.183400}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":26.820553,"latitude":30.802498}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":13.794200,"latitude":-88.896500}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":1.650800,"latitude":10.267900}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":15.179400,"latitude":39.782300}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":58.595300,"latitude":25.013600}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-26.522500,"latitude":31.465900}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":9.145000,"latitude":40.489700}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-17.713400,"latitude":178.065000}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":61.924110,"latitude":25.748151}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"French Guiana","longitude":3.933900,"latitude":-53.125800}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"French Polynesia","longitude":-17.679700,"latitude":149.406800}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Guadeloupe","longitude":16.265000,"latitude":-61.551000}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Mayotte","longitude":-12.827500,"latitude":45.166244}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"New Caledonia","longitude":-20.904305,"latitude":165.618042}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Reunion","longitude":-21.115100,"latitude":55.536400}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Saint Barthelemy","longitude":17.900000,"latitude":-62.833300}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"St Martin","longitude":18.070800,"latitude":-63.050100}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Martinique","longitude":14.641500,"latitude":-61.024200}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":46.227600,"latitude":2.213700}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-0.803700,"latitude":11.609400}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":13.443200,"latitude":-15.310100}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":42.315400,"latitude":43.356900}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":51.165691,"latitude":10.451526}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":7.946500,"latitude":-1.023200}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":39.074200,"latitude":21.824300}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":15.783500,"latitude":-90.230800}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":9.945600,"latitude":-9.696600}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":4.860416,"latitude":-58.930180}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":18.971200,"latitude":-72.285200}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":41.902900,"latitude":12.453400}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":15.200000,"latitude":-86.241900}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":47.162500,"latitude":19.503300}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":64.963100,"latitude":-19.020800}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":20.593684,"latitude":78.962880}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-0.789300,"latitude":113.921300}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":32.427908,"latitude":53.688046}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":33.223191,"latitude":43.679291}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":53.142400,"latitude":-7.692100}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":31.046051,"latitude":34.851612}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":41.871940,"latitude":12.567380}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":18.109600,"latitude":-77.297500}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":36.204824,"latitude":138.252924}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":31.240000,"latitude":36.510000}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":48.019600,"latitude":66.923700}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-0.023600,"latitude":37.906200}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":35.907757,"latitude":127.766922}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":29.311660,"latitude":47.481766}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":41.204380,"latitude":74.766098}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":56.879600,"latitude":24.603200}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":33.854700,"latitude":35.862300}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":6.428055,"latitude":-9.429499}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":47.140000,"latitude":9.550000}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":55.169400,"latitude":23.881300}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":49.815300,"latitude":6.129600}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-18.766947,"latitude":46.869107}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":4.210484,"latitude":101.975766}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":3.202800,"latitude":73.220700}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":35.937500,"latitude":14.375400}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":21.007900,"latitude":-10.940800}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-20.348404,"latitude":57.552152}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":23.634500,"latitude":-102.552800}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":47.411600,"latitude":28.369900}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":43.733300,"latitude":7.416700}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":46.862500,"latitude":103.846700}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":42.708678,"latitude":19.374390}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":31.791700,"latitude":-7.092600}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-22.957600,"latitude":18.490400}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":28.166700,"latitude":84.250000}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Aruba","longitude":12.521100,"latitude":-69.968300}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Curacao","longitude":12.169600,"latitude":-68.990000}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Sint Maarten","longitude":18.042500,"latitude":-63.054800}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":52.132600,"latitude":5.291300}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-40.900600,"latitude":174.886000}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":12.865416,"latitude":-85.207229}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":17.607789,"latitude":8.081666}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":9.082000,"latitude":8.675300}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":41.608600,"latitude":21.745300}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":60.472000,"latitude":8.468900}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":21.512583,"latitude":55.923255}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":30.375300,"latitude":69.345100}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":8.538000,"latitude":-80.782100}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-6.314993,"latitude":143.955550}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-23.442500,"latitude":-58.443800}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-9.190000,"latitude":-75.015200}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":12.879721,"latitude":121.774017}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":51.919400,"latitude":19.145100}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":39.399900,"latitude":-8.224500}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":25.354800,"latitude":51.183900}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":45.943200,"latitude":24.966800}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":61.524010,"latitude":105.318756}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-1.940300,"latitude":29.873900}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":13.909400,"latitude":-60.978900}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":12.984300,"latitude":-61.287200}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":43.942400,"latitude":12.457800}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":23.885942,"latitude":45.079162}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":14.497400,"latitude":-14.452400}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":44.016500,"latitude":21.005900}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-4.679600,"latitude":55.492000}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":1.283300,"latitude":103.833300}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":48.669000,"latitude":19.699000}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":46.151200,"latitude":14.995500}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":5.152149,"latitude":46.199616}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-30.559500,"latitude":22.937500}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":40.463667,"latitude":-3.749220}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":7.873054,"latitude":80.771797}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":12.862800,"latitude":30.217600}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":3.919300,"latitude":-56.027800}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":60.128161,"latitude":18.643501}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":46.818200,"latitude":8.227500}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":23.700000,"latitude":121.000000}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-6.369028,"latitude":34.888822}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":15.870032,"latitude":100.992541}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":8.619500,"latitude":0.824800}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":10.691800,"latitude":-61.222500}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":33.886917,"latitude":9.537499}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":38.963700,"latitude":35.243300}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":1.373333,"latitude":32.290275}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":48.379400,"latitude":31.165600}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":23.424076,"latitude":53.847818}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Bermuda","longitude":32.307800,"latitude":-64.750500}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Cayman Islands","longitude":19.313300,"latitude":-81.254600}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Channel Islands","longitude":49.372300,"latitude":-2.364400}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Gibraltar","longitude":36.140800,"latitude":-5.353600}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Isle of Man","longitude":54.236100,"latitude":-4.548100}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Montserrat","longitude":16.742498,"latitude":-62.187366}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":55.378100,"latitude":-3.436000}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-32.522800,"latitude":-55.765800}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":40.000000,"latitude":-100.000000}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":41.377491,"latitude":64.585262}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":6.423800,"latitude":-66.589700}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":14.058324,"latitude":108.277199}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-13.133897,"latitude":27.849332}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-19.015438,"latitude":29.154857}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Diamond Princess","longitude":0.000000,"latitude":0.000000}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":15.415000,"latitude":-61.371000}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":12.116500,"latitude":-61.679000}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-18.665695,"latitude":35.529562}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":34.802075,"latitude":38.996815}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-8.874217,"latitude":125.727539}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":17.189900,"latitude":-88.497600}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":19.856270,"latitude":102.495496}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":26.335100,"latitude":17.228331}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":31.952200,"latitude":35.233200}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":11.803700,"latitude":-15.180400}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":17.570692,"latitude":-3.996166}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":17.357822,"latitude":-62.782998}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Northwest Territories","longitude":64.825500,"latitude":-124.845700}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Yukon","longitude":64.282300,"latitude":-135.000000}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":42.602636,"latitude":20.902977}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":21.916200,"latitude":95.956000}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Anguilla","longitude":18.220600,"latitude":-63.068600}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"British Virgin Islands","longitude":18.420700,"latitude":-64.640000}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Turks and Caicos Islands","longitude":21.694000,"latitude":-71.797900}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":0.000000,"latitude":0.000000}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-22.328500,"latitude":24.684900}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-3.373100,"latitude":29.918900}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":8.460555,"latitude":-11.779889}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Bonaire, Sint Eustatius and Saba","longitude":12.178400,"latitude":-68.238500}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-13.254300,"latitude":34.301500}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Falkland Islands (Malvinas)","longitude":-51.796300,"latitude":-59.523600}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":"Saint Pierre and Miquelon","longitude":46.885200,"latitude":-56.315900}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":6.877000,"latitude":31.307000}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":24.215500,"latitude":-12.885800}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":0.186400,"latitude":6.613100}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":15.552727,"latitude":48.516388}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-11.645500,"latitude":43.333300}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":38.861000,"latitude":71.276100}
+                    ]);
+
+                INSERT INTO LocationData
+                    ([
+                    {"location_name":null,"longitude":-29.610000,"latitude":28.233600}
+                    ]);
