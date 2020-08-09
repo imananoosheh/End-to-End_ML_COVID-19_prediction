@@ -41,8 +41,10 @@ def predict(countryName, statType, degree=7):
         from list of country used in JohnHopkins Github updating dataset.
     statType : STRING
         'confirmed', 'deaths', or 'recovered'.
-
-    A JSON file with the name of \'prediction.json\' is created in current directory.
+    degree=7 : int
+        Caller can enter the desiered degree of polynomial regression    
+    
+    A JSON file with the name of \'prediction_{date and time of now}.json\' is created in current directory.
 
     """
     # Manual Input
@@ -111,13 +113,13 @@ def predict(countryName, statType, degree=7):
     errorRange = mean_absolute_error(y, Y_predicted)
     
     #Visualising the Polynomial Regression results
-    plt.scatter(X, y, color = 'red') # Actual Value
-    plt.plot(X, Y_predicted, color = 'blue') # Polynomial Regression Value
-    plt.scatter(nextWeekIndex, nextWeek, color = 'black') # Next Week scattered epredicted
-    plt.title('COVID-19 stat prediction (Using Polynomial Regression, with degree of ' + str(degree) + ')\n' + CalculateAccuracy(y, Y_predicted))
-    plt.xlabel('Dates')
-    plt.ylabel(str(statType))
-    plt.show()
+    # plt.scatter(X, y, color = 'red') # Actual Value
+    # plt.plot(X, Y_predicted, color = 'blue') # Polynomial Regression Value
+    # plt.scatter(nextWeekIndex, nextWeek, color = 'black') # Next Week scattered epredicted
+    # plt.title('COVID-19 stat prediction (Using Polynomial Regression, with degree of ' + str(degree) + ')\n' + CalculateAccuracy(y, Y_predicted))
+    # plt.xlabel('Dates')
+    # plt.ylabel(str(statType))
+    # plt.show()
     
     ## Crafting a JSON file as a return output
     #JSON structure
@@ -125,9 +127,13 @@ def predict(countryName, statType, degree=7):
     # {
     #     'countryName' : str(countryName), # :string of input country name
     #     'statType' : str(statType), # :float or ndarray of floats of input stat type ('confirmed', 'deaths', or 'recovered')
-    #     'nextWeek' : nextWeek.tolist(), # :list of next 7 days of predicted statType value 
     #     'errorRange' : errorRange, # :float or ndarray of floats as an range of error = value(+/-)errorRange
     #     'PolyRegDeg' : degree # :int of maximum degree of polynomial regression fit to the data
+    #     'X' : X.tolist(), # :list Actual dates 
+    #     'y' : y.tolist(), # :list Actual values
+    #     'Y_predicted' : Y_predicted.tolist(), # :list Predicted polynomial regression value for all the dates
+    #     'nextWeekIndex' : nextWeekIndex.tolist(), # :list Next week index [len(y), len(y)+7]
+    #     'nextWeek' : nextWeek.tolist(), # :list of next 7 days of predicted statType value 
     #     }
     nextWeekPredictionDict= {
         'countryName' : str(countryName),
@@ -140,13 +146,13 @@ def predict(countryName, statType, degree=7):
         'nextWeekIndex' : nextWeekIndex.tolist(),
         'nextWeek' : nextWeek.tolist()
         }
+    
     now = datetime.now()
     datetime_string = now.strftime("%d-%m-%Y_%H-%M-%S")
     with open('prediction_' + datetime_string + '.json', 'w', encoding='utf-8') as outfile:
         # outfile.write(json.dump(nextWeekPredictionDict, outfile))
         json.dump(nextWeekPredictionDict, outfile)
 
-    return "Next week's predicted values starting from tomorrow", nextWeek
         
 
 ## Test Calls
