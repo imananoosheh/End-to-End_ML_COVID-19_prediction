@@ -12,6 +12,7 @@ from sklearn.metrics import mean_absolute_error, r2_score, mean_squared_error
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
 import json
+from datetime import datetime
 
 
 #   Function to calculate accuracy
@@ -30,7 +31,7 @@ def CalculateAccuracy(y_test, Y_predicted):
     
     return measurements
 
-def predict(countryName, statType):
+def predict(countryName, statType, degree=7):
     """
     
 
@@ -46,7 +47,8 @@ def predict(countryName, statType):
     """
     # Manual Input
     # countryName = 'Canada'
-    # statType = 'deaths'
+    # statType = 'confirmed'
+    # degree = 6
     
     ## Data Preprocessing
     # Loading the dataset from Github API ( https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_time_series )
@@ -56,7 +58,7 @@ def predict(countryName, statType):
     # Dropping unnecesary datas
     dataset = df.drop(['Province/State', 'Lat', 'Long'], axis=1)
     
-    # Concatinating the values for each day in countries with more than 1 entries to have the country's data in whole
+    # Concatinating the 
     newDataset = {}
     for index, country in enumerate(dataset['Country/Region']):
         if country in newDataset.keys():
@@ -90,7 +92,7 @@ def predict(countryName, statType):
     
     ## Polynomial Regression Fitting
     # Fitting Polynomial Regression to the dataset
-    degree = 7
+    degree = degree
     poly_reg = PolynomialFeatures(degree = degree)
     X_poly = poly_reg.fit_transform(X.reshape(-1, 1))
     poly_reg.fit(X_poly, y)
@@ -98,50 +100,58 @@ def predict(countryName, statType):
     lin_reg_2.fit(X_poly, y)
     
     # Error Calculation till up to now
-    X_grid = np.arange(0, len(y), 1).reshape(-1, 1)
-    Y_predicted = lin_reg_2.predict(poly_reg.fit_transform(X_grid))
+    X = X.reshape(-1, 1)
+    Y_predicted = lin_reg_2.predict(poly_reg.fit_transform(X))
     measurements = CalculateAccuracy(y, Y_predicted)
-    print("\n"+measurements)
+    # print("\n"+measurements)
     
     # Storing next weeks predicted values in an array
     nextWeekIndex = np.arange(len(y), len(y)+7, 1).reshape(-1, 1)
     nextWeek = lin_reg_2.predict(poly_reg.fit_transform(nextWeekIndex))
     errorRange = mean_absolute_error(y, Y_predicted)
     
-    # Visualising the Polynomial Regression results
-    # plt.scatter(X, y, color = 'red')
-    # plt.plot(X_grid, Y_predicted, color = 'blue')
-    # plt.title('COVID-19 stat prediction (Using Polynomial Regression, with degree of ' + str(degree) + ')\n' + CalculateAccuracy(y, Y_predicted))
-    # plt.xlabel('Dates')
-    # plt.ylabel(str(statType))
-    # plt.show()
+    #Visualising the Polynomial Regression results
+    plt.scatter(X, y, color = 'red') # Actual Value
+    plt.plot(X, Y_predicted, color = 'blue') # Polynomial Regression Value
+    plt.scatter(nextWeekIndex, nextWeek, color = 'black') # Next Week scattered epredicted
+    plt.title('COVID-19 stat prediction (Using Polynomial Regression, with degree of ' + str(degree) + ')\n' + CalculateAccuracy(y, Y_predicted))
+    plt.xlabel('Dates')
+    plt.ylabel(str(statType))
+    plt.show()
     
     ## Crafting a JSON file as a return output
     #JSON structure
-    # nextWeekPredictionDict['data'] 
-    # ({
+    # nextWeekPredictionDict = 
+    # {
     #     'countryName' : str(countryName), # :string of input country name
     #     'statType' : str(statType), # :float or ndarray of floats of input stat type ('confirmed', 'deaths', or 'recovered')
     #     'nextWeek' : nextWeek.tolist(), # :list of next 7 days of predicted statType value 
     #     'errorRange' : errorRange, # :float or ndarray of floats as an range of error = value(+/-)errorRange
     #     'PolyRegDeg' : degree # :int of maximum degree of polynomial regression fit to the data
-    #     })
+    #     }
     nextWeekPredictionDict= {
         'countryName' : str(countryName),
         'statType' : str(statType),
-        'nextWeek' : nextWeek.tolist(),
         'errorRange' : errorRange,
-        'PolyRegDeg' : degree
+        'PolyRegDeg' : degree,
+        'X' : X.tolist(),
+        'y' : y.tolist(),
+        'Y_predicted' : Y_predicted.tolist(),
+        'nextWeekIndex' : nextWeekIndex.tolist(),
+        'nextWeek' : nextWeek.tolist()
         }
-    
-    with open('prediction.json', 'w', encoding='utf-8') as outfile:
+    now = datetime.now()
+    datetime_string = now.strftime("%d-%m-%Y_%H-%M-%S")
+    with open('prediction_' + datetime_string + '.json', 'w', encoding='utf-8') as outfile:
         # outfile.write(json.dump(nextWeekPredictionDict, outfile))
         json.dump(nextWeekPredictionDict, outfile)
+
+    return "Next week's predicted values starting from tomorrow", nextWeek
         
 
 ## Test Calls
-predict('Canada', 'deaths')
-# predict('Canada', 'confirmed')
+# predict('Canada', 'deaths')
+# predict('Canada', 'confirmed', 5)
 # predict('Austria', 'confirms')
 # predict('Italy', 'deaths')
 
