@@ -3,8 +3,8 @@ import requests, csv, sys
 if __name__ == '__main__':
     
     confirmed_url = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv'
-    death_url = 'https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv'
-    recovered_url = 'https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv'
+    death_url = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv'
+    recovered_url = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv'
     asterix_url = 'http://localhost:19002/query/service'
     
     data = {
@@ -62,9 +62,6 @@ if __name__ == '__main__':
     'statement': '''DROP TYPE ProvinceDataType IF EXISTS;'''
     }
 
-    response = requests.post(asterix_url, data=data)
-    print((response.text))
-
 
     response = requests.post(asterix_url, data=data)
     print((response.text))
@@ -83,7 +80,7 @@ if __name__ == '__main__':
     'client_context_id': 'xyz',
     'statement': '''CREATE TYPE ProvinceDataType AS closed
                     {
-                        date: date,
+                        date: string,
                         province: string,
                         country: string,
                         confirmed: int,
@@ -151,24 +148,78 @@ if __name__ == '__main__':
         confirmed_list = list(cd)
         
 
-        for row in confirmed_list[1:]:
-            if row[0]:
-                location_name = '"' + row[0] + '"'
-            else:
-                location_name = '"' + row[1] + '"'
+        # for row in confirmed_list[1:]:
+        #     if row[0]:
+        #         location_name = '"' + row[0] + '"'
+        #     else:
+        #         location_name = '"' + row[1] + '"'
                 
-            statement = '''
-                INSERT INTO LocationDataset
-                ([
-                {"location_name":%s, "longitude":%f, "latitude":%f}
-                ]);''' %(location_name, float(row[2]), float(row[3]))
+        #     statement = '''
+        #         INSERT INTO LocationDataset
+        #         ([
+        #         {"location_name":%s, "longitude":%f, "latitude":%f}
+        #         ]);''' %(location_name, float(row[2]), float(row[3]))
 
-            data = {
-            'pretty': 'true',
-            'client_context_id': 'xyz',
-            'statement': statement
-            }
+        #     data = {
+        #     'pretty': 'true',
+        #     'client_context_id': 'xyz',
+        #     'statement': statement
+        #     }
             
-            response = requests.post(asterix_url, data=data)
-            print((response.text))
-    
+        #     response = requests.post(asterix_url, data=data)
+        #     print((response.text))
+
+        
+        #### retrieving death data
+        death_data = s.get(death_url)
+
+        decoded_death_data = death_data.content.decode('utf-8')
+
+        dd = csv.reader(decoded_death_data.splitlines(), delimiter=',')
+        death_list = list(dd)
+        print(death_list[0])
+
+        ### retrieving recovered data
+
+        recovered_data = s.get(recovered_url)
+
+        decoded_recovered_data = recovered_data.content.decode('utf-8')
+
+        rd = csv.reader(decoded_recovered_data.splitlines(), delimiter=',')
+        recovered_list = list(rd)
+        print(recovered_list[0])
+
+
+        dates = confirmed_list[0][4:]
+        for j in range(1, len(confirmed_list)):
+            i = 0
+            if confirmed_list[j][0]:
+                province = '"' + confirmed_list[j][0] + '"'
+            else:
+                province = 'NA'
+            
+            for k in range(4, len(confirmed_list[j])):
+                try:
+                    statement = '''
+                        INSERT INTO ProvinceDataset
+                        ([
+                        {"date": %s, "province": %s, "country": %s, "confirmed": %d, "death": %d, "recovered": %d}
+                        ]);''' %(dates[i], province, confirmed_list[j][1], int(confirmed_list[j][k]), int(death_list[j][k]), int(recovered_list[j][k]))
+                except IndexError:
+                    i = i + 1
+                    continue
+
+                print(statement + '\n')
+                i = i + 1
+
+                data = {
+                'pretty': 'true',
+                'client_context_id': 'xyz',
+                'statement': statement
+                }
+                
+                response = requests.post(asterix_url, data=data)
+                print((response.text))
+
+
+
